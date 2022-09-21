@@ -27,6 +27,6 @@ RUN pip install pip --upgrade && \
 COPY tango ./tango
 COPY bin ./bin
 
-
+WORKDIR /app/tango
 ENTRYPOINT /app/tango/docker-entrypoint.sh
 

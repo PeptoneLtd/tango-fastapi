@@ -16,7 +16,6 @@ header_re = re.compile(r'^res\s+aa\s+Beta\s+Turn\s+Helix\s+Aggregation\s+Conc-St
 line_re = re.compile(
     r'^(?P<res>\d+)\s+(?P<aa>\S+)\s+(?P<beta>\S+)\s+(?P<turn>\S+)\s+(?P<helix>\S+)\s+(?P<aggregation>\S+)\s+\S+\s*$')
 error_re = re.compile(r'^ERROR:\s*(.*)')
-tmp_path = "/tmp"
 
 def producer(name: str = "p0", **kwargs) -> None:
     pl = platform.system()
@@ -77,7 +76,7 @@ def fifo(path: str):
 
 
 def run(name: str = "p0", **kwargs):
-    name = os.path.join(tmp_path, f"{name}_{datetime.datetime.utcnow().isoformat()}")
+    name = f"{name}_{datetime.datetime.utcnow().isoformat()}"
     with fifo(f"{name}.txt"), concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         logger.debug("starting consumer")
         c = executor.submit(consumer, name=name)
