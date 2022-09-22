@@ -33,8 +33,9 @@ class TangoRequest(BaseModel):
     ct: Literal['N', 'Y'] = 'N'
     nt: Literal['N', 'A', 'S'] = 'N'
     ph: float = Field(default=7.2, ge=0.0, le=14.0)
-    te: float = Field(default=298.15, gt=0.0)
+    te: float = Field(default=298.5, gt=0.0)
     io: float = Field(default=0.1, ge=0.0)
+    stab: float = Field(default=-10.0)
     seq: str
 
     @validator('seq')
@@ -46,7 +47,7 @@ class TangoRequest(BaseModel):
 @app.post("/v1/tango/aggregation", response_model=List[float])
 async def v1_tango_aggregation(req: TangoRequest) -> List[float]:
     res = tango.predictor.run(name=req.name, ct=req.ct, nt=req.nt,
-                              ph=req.ph, te=req.te, io=req.io, seq=req.seq)
+                              ph=req.ph, te=req.te, io=req.io, stab=req.stab, seq=req.seq)
     return [i['aggregation'] for i in res]
 
 
