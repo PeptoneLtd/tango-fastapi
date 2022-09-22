@@ -24,7 +24,7 @@ COPY requirements.txt .
 RUN pip install pip --upgrade && \
     pip install -r requirements.txt
 
-COPY tango ./tango
+COPY --chown=app:app tango ./tango
 COPY bin ./bin
 
 WORKDIR /app/tango
