@@ -44,7 +44,7 @@ class TangoRequest(BaseModel):
             raise ValueError(f"input sequence contains invalid amino acids")
         return v.upper()
 
-@app.post("/v1/tango/aggregation", response_model=List[float])
+@app.post("/tango/api/v1/aggregation", response_model=List[float])
 async def v1_tango_aggregation(req: TangoRequest) -> List[float]:
     res = tango.predictor.run(name=req.name, ct=req.ct, nt=req.nt,
                               ph=req.ph, te=req.te, io=req.io, stab=req.stab, seq=req.seq)
