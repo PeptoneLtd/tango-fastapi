@@ -9,9 +9,6 @@ into an API.
 
 Configuration is performed via env variables:
 
-- `HOST` bind address (defaults to `0.0.0.0`)
-- `PORT` listen port (defualts to `8000`)
-- `UVICORN_WORKER_COUNT` (defaults to `1`)
 - `OTEL_EXPORTER_ZIPKIN_ENDPOINT` (and other opentelemetry env variables). If set, traces will be sent to that endpoint,
   leveraging automatic opentelemetry instrumentation through fastapi
 
